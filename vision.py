@@ -15,13 +15,13 @@ from PIL import Image
 import google.generativeai as genai
 
 
-os.getenv("GOOGLE_API_KEY")
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 ## Function to load OpenAI model and get respones
 
 def get_gemini_response(input,image,prompt):
-    model = genai.GenerativeModel('gemini-pro-vision')
+    model = genai.GenerativeModel('gemini-3.5-flash-lite')
     response = model.generate_content([input,image[0],prompt])
     return response.text
     
@@ -53,7 +53,7 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png
 image=""   
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image.", use_column_width=True)
+    st.image(image, caption="Uploaded Image.", use_container_width=True)
 
 
 submit=st.button("Tell me about the image")
